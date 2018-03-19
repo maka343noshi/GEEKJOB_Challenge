@@ -7,7 +7,6 @@
     out.print(word1 + word2 + word3);
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
