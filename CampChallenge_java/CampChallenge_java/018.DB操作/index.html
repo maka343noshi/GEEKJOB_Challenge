@@ -1,0 +1,45 @@
+<!-- 
+    index.html          ページトップ
+    userLogin.jsp       id pass 入力
+    Login.java          DBと入力されたID pass を照合、正しくなければuserLogin.jspに返す
+    itemBase.jsp        ログインホーム、一覧表示、検索へのリンク
+    itemSeach.jsp       userID、passセッションの確認のみ
+    itemSeach.jsp       ID、その他複合検索条件の入力
+    itemList.java       入力された条件でDBを検索、itemBase.jspで一覧表示の場合すべてを検索、正しくなければitemSeach.jspに返す
+    itemList.jsp        itemList.javaで検索した一覧を表示、商品情報の新規登録へのリンク
+    itemControl.java    新規登録、編集、削除のどれを押されたか判断し、専用のフォームへ飛ばす
+    itemNew.jsp         新規登録、必要事項入力
+    itemNewConf.java    入力内容をセッションに格納
+    itemNewConf.jsp     入力内容をユーザに確認
+    itemNewResult.java  入力内容をDBに挿入
+    itemNewResult.jsp   「登録完了」表示、itemBase.javaへリンク
+    itemNewBase.java    userID、passセッションの確認のみ
+    index.java          userID、passセッション破棄
+    error.jsp           エラー時に飛ばされる。エラー情報をリクエストスコープで保持取得
+    
+    
+    Check.java          userID,pass照合処理
+    DBcon.java          DBとの接続を返す処理
+    DBoperation.java    ID検索、条件検索、全検索、挿入等、DBへの操作の処理
+    issueSQL.java       DBoparation.javaがDB操作をするためのSQL文を発行する
+    dataList.java       itemSeach時に入力検索された結果をもとにitemList.jpsで表示するhtmlを作成
+
+
+    ※itemNew.jspでの入力ミスチェック未実装
+    ※itemList.jspでの変更後の色付け未実装
+    ※itemList.jsp、itemControl.javaでの編集、削除機能未実装
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>在庫管理システム　トップ</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>在庫管理システム　トップ</h1><br>
+        <h3>在庫の検索、登録編集ができます。</h3><br>
+        <h3>下のページからログインしてください。</h3><br><br>
+        <a href="./userLogin">ログイン</a>
+    </body>
+</html>
