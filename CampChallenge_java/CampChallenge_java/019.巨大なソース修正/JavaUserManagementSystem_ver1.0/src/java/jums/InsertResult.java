@@ -31,16 +31,18 @@ public class InsertResult extends HttpServlet {
         
         //セッションスタート
         HttpSession session = request.getSession();
-        
+        request.setCharacterEncoding("UTF-8");
+
         try{
-            //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
-            UserDataDTO userdata = new UserDataDTO();
-            userdata.setName((String)session.getAttribute("name"));
-            Calendar birthday = Calendar.getInstance();
-            userdata.setBirthday(birthday.getTime());
-            userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
-            userdata.setTell((String)session.getAttribute("tell"));
-            userdata.setComment((String)session.getAttribute("comment"));
+            //アクセスチェック
+            String accesschk = request.getParameter("ac");
+            if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
+                throw new Exception("不正なアクセスです");
+            }
+            
+            //入力情報をUserDataBeansから取り出し、UserDataDTOに変換
+            UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");
+            UserDataDTO userdata = udb.convert();
             
             //DBへデータの挿入
             UserDataDAO .getInstance().insert(userdata);

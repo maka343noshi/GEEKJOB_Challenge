@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    //セッションをクリア
+    HttpSession hs = request.getSession();
+    hs.invalidate();
+%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>

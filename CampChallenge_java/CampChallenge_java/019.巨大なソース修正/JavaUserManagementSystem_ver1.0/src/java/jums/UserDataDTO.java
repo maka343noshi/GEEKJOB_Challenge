@@ -1,8 +1,8 @@
 package jums;
 
 import java.sql.Timestamp;
-import java.util.Date;
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 /**
  * ユーザー情報を持ちまわるJavaBeans
  * データベースのカラムと型に対応させている(DTO)。データの挿入、取り出しどちらにも便利
@@ -12,7 +12,7 @@ import java.util.Date;
 public class UserDataDTO {
     private int userID;
     private String name;
-    private Date birthday;
+    private Date birthday;  //DBに近い形でjava.sql.Dateで保持
     private String tell;
     private int type;
     private String comment;
