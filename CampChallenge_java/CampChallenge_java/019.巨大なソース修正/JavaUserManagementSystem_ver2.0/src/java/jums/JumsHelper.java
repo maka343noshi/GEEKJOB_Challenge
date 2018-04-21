@@ -10,6 +10,7 @@ public class JumsHelper {
     
     //トップへのリンクを定数として設定
     private final String homeURL = "index.jsp";
+    private final String detailURL = "ResultDetail";
     
     public static JumsHelper getInstance(){
         return new JumsHelper();
@@ -19,6 +20,12 @@ public class JumsHelper {
     public String home(){
         return "<a href=\""+homeURL+"\">トップへ戻る</a>";
     }
+    
+    //詳細画面へのリンクを返却
+    public String detail(int id){
+        return "<a href=\""+detailURL+"?id="+id+"\">詳細画面へ戻る</a>";
+    }
+    
     
     /**
      * 入力されたデータのうち未入力項目がある場合、チェックリストにしたがいどの項目が
@@ -71,4 +78,19 @@ public class JumsHelper {
         }
         return "";
     }
+    
+    /**
+     * 未入力かどうかのチェックを行う。ArrayList chkListを回して項目があればtrueを返す(update.jspで使用)
+     * @param chkList datatype
+     * @return boolean
+     */
+    public boolean inputCheck(ArrayList<String> chkList, String datatype){
+        for(String entry : chkList){
+            if(entry.equals(datatype)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

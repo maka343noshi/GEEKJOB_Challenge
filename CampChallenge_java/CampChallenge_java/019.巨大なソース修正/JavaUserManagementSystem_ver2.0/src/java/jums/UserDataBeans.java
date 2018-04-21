@@ -1,6 +1,7 @@
 package jums;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -151,6 +152,27 @@ public class UserDataBeans implements Serializable{
         udd.setTell(this.tell);
         udd.setType(this.type);
         udd.setComment(this.comment);
+    }
+    
+    
+    /**
+    * UserDataDTOのデータをUserDataBeansに変更するメソッド
+    * DBから取り出したデータを入力用として扱うことができる
+    * @param udd　対応したデータを保持しているJavaBeans
+    */
+    public void DTO2UDMapping(UserDataDTO udd){
+        this.name = udd.getName();
+        
+        String stryear = new SimpleDateFormat("yyyy").format(udd.getBirthday());
+        String strmonth = new SimpleDateFormat("MM").format(udd.getBirthday());
+        String strday = new SimpleDateFormat("dd").format(udd.getBirthday());
+        this.year = Integer.valueOf(stryear);
+        this.month = Integer.valueOf(strmonth);
+        this.day = Integer.valueOf(strday);
+        
+        this.tell = udd.getTell();
+        this.type = udd.getType();
+        this.comment = udd.getComment();
     }
     
 }

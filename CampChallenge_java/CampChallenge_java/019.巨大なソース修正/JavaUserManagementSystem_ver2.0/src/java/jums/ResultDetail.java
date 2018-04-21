@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,13 +25,18 @@ public class ResultDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //セッションスタート
+        HttpSession session = request.getSession();
+        session.setAttribute("ac", (int) (Math.random() * 1000));
         try{
             request.setCharacterEncoding("UTF-8");//リクエストパラメータの文字コードをUTF-8に変更
-
+            int id = Integer.valueOf(request.getParameter("id"));
+            session.setAttribute("id", id);
+            
             //DTOオブジェクトにマッピング。DB専用のパラメータに変換
             UserDataDTO searchData = new UserDataDTO();
-            searchData.setUserID(2);
-
+            searchData.setUserID(id);
+            
             UserDataDTO resultData = UserDataDAO .getInstance().searchByID(searchData);
             request.setAttribute("resultData", resultData);
             

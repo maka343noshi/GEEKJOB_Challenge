@@ -1,0 +1,79 @@
+
+・Search.java
+	アクセスチェックに用いる"ac"セッションの追加
+
+・search.jsp
+	一度入力した条件があれば入力情報を保持した表示になるように修正
+
+・SearchResult.java
+	アクセスチェックを追加
+	requestスコープに格納するデータをUserDataDTOからArrayList<UserDataDTO>に変更
+
+・searchresult.jsp
+	検索結果が１件しか表示できない。
+	→複数件表示できるように修正
+	条件に当てはまるデータがない時その旨をを表示するように修正
+	検索画面への戻るを追加
+
+・ResultDetail.java
+	アクセスチェックに用いる"ac"セッションの追加
+	SearchResult.jspから取得したuserIDによって検索を行うように修正
+
+・resultdetail.jsp
+	トップに戻るを追加
+	直リンクにて指定されたuserIDのデータがない場合その旨を表示するように修正
+
+・Update.java
+	アクセスチェックを追加
+	userIDで検索をしてupdate,jsp delete.jspに渡すように修正
+
+・update.jsp
+	初期状態でuserIDに適応した情報が始めから入っている状態に修正
+	未入力時の警告表示を追加
+	トップに戻る、詳細情報へ戻るを追加
+
+・UpdateResult.java
+	アクセスチェックを追加
+	未入力チェックを追加
+	DBへの更新操作の実装
+
+・updateresult.jsp
+	トップに戻る、詳細情報へ戻るを追加
+
+・Delete.java
+	アクセスチェックを追加
+
+・delete.jsp
+	トップに戻るを追加
+
+・DeleteResult.java
+	アクセスチェックを追加
+	DBへの削除操作の実装
+
+・deleteresult.jsp
+	トップに戻るを追加
+
+
+・JumsHelper.java
+	update.jspにおいて未入力チェックを行うメソッドを追加
+	詳細画面へ戻るURLを返却するメソッドを追加
+
+・DBManager.java
+	DBへ接続できなかったときのメッセージを送れるように修正
+
+・UserDataDAO.java
+	UserDataDTO serch(UserDataDTO)において
+	検索条件をすべてには入力していないとき、プリペアドステイトメントで全ての ? に条件をセットしようとしていた。
+	→sql文作成のUserDataBeansのデータの有無の判断と同時に条件をセットするように修正。
+
+	searchByID(UserDataDTO ud)において
+	レコードがない場合UserDataDTOのnullを返すように修正
+	
+	複数条件で検索するとき、検索結果が一件に限定されてしまう。
+	→ArrayList<UserDataDTO>に検索結果を複数件格納する
+	
+	DBへの更新処理、削除処理を行うメソッドの追加（update(UserDataDTO), delete(UserDataDTO))
+	
+	DB接続失敗時にメッセージを呼び出し元に返せるように修正
+
+
