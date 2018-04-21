@@ -20,6 +20,7 @@
         電話番号:<%= udb.getTell()%><br>
         自己紹介:<%= udb.getComment()%><br>
         以上の内容で登録しました。<br>
+        <br><br>
+        <%=jh.home()%>
     </body>
-    <%=jh.home()%>
 </html>

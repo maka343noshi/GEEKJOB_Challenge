@@ -24,7 +24,7 @@
         種別:<%= jh.exTypenum(udb.getType())%><br>
         電話番号:<%= udb.getTell()%><br>
         自己紹介:<%= udb.getComment()%><br>
-        上記の内容で登録します。よろしいですか？
+        上記の内容で登録します。よろしいですか？<br>
         <form action="insertresult" method="POST">
             <input type="hidden" name="ac"  value="<%= hs.getAttribute("ac")%>">
             <input type="submit" name="yes" value="はい">
@@ -33,10 +33,12 @@
         <h1>入力が不完全です</h1>
         <%=jh.chkinput(chkList) %>
     <% } %>
+        <br>
         <form action="insert" method="POST">
             <input type="submit" name="no" value="登録画面に戻る">
             <input type="hidden" name="mode" value="REINPUT">
         </form>
+        <br>
         <%=jh.home()%>
     </body>
 </html>
