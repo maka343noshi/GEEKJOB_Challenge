@@ -11,7 +11,7 @@ require_once '../common/dbaccesUtil.php';
 </head>
 <body>
     <?php
-    $result = delete_profile($_GET['id']);
+    $result = delete_profile($_POST['id']);
     //エラーが発生しなければ表示を行う
     if(!isset($result)){
     ?>

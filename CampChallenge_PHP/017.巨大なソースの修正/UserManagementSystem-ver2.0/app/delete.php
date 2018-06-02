@@ -11,7 +11,7 @@ require_once '../common/dbaccesUtil.php';
 </head>
   <body>
     <?php
-    $result = profile_detail($_GET['id']);
+    $result = profile_detail($_POST['id']);
     //エラーが発生しなければ表示を行う
     if(is_array($result)){
     ?>
@@ -25,9 +25,11 @@ require_once '../common/dbaccesUtil.php';
     登録日時:<?php echo date('Y年n月j日　G時i分s秒', strtotime($result[0]['newDate'])); ?><br>
     
     <form action="<?php echo DELETE_RESULT; ?>" method="POST">
+      <input type="hidden" name="id" value=<?php echo $_POST['id'] ?>>
       <input type="submit" name="YES" value="はい"style="width:100px">
     </form><br>
-    <form action="<?php echo RESULT_DETAIL; ?>" method="POST">
+    <form action="<?php echo RESULT_DETAIL; ?>" method="GET">
+      <input type="hidden" name="id" value=<?php echo $_POST['id'] ?>>
       <input type="submit" name="NO" value="詳細画面に戻る"style="width:100px">
     </form>
     

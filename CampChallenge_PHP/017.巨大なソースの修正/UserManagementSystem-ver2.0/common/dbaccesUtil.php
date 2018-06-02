@@ -3,7 +3,7 @@
 //DBへの接続を行う。成功ならPDOオブジェクトを、失敗なら中断、メッセージの表示を行う
 function connect2MySQL(){
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=Challenge_db;charset=utf8','hayashi','password');
+        $pdo = new PDO('mysql:host=localhost;dbname=challenge_db;charset=utf8','root','');
         //SQL実行時のエラーをtry-catchで取得できるように設定
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
@@ -84,27 +84,32 @@ function serch_profiles($name=null,$year=null,$type=null){
     $search_sql = "SELECT * FROM user_t";
     $flag = false;
     if(isset($name)){
-        $search_sql .= " WHERE name like :name";
+        $search_sql .= " WHERE name like ";
         $flag = true;
+        $search_sql .= '\'%'.$name.'%\'';
     }
-    if(isset($year) && $flag = false){
-        $search_sql .= " WHERE birthday like :year";
+    if(isset($year) && $flag == false){
+        $search_sql .= " WHERE birthday like ";
         $flag = true;
+        $search_sql .= '\'%'.$year.'%\'';
     }else if(isset($year)){
-        $search_sql .= " AND birthday like :year";
+        $search_sql .= " AND birthday like ";
+        $search_sql .= '\'%'.$year.'%\'';
     }
-    if(isset($type) && $flag = false){
-        $search_sql .= " WHERE type = :type";
+    if(isset($type) && $flag == false){
+        $search_sql .= " WHERE type = ";
+        $search_sql .= $type;
     }else if(isset($type)){
-        $search_sql .= " AND type = :type";
+        $search_sql .= " AND type = ";
+        $search_sql .= '\''.$type.'\'';
     }
     
     //クエリとして用意
     $seatch_query = $search_db->prepare($search_sql);
     
-    $seatch_query->bindValue(':name','%'.$name.'%');
-    $seatch_query->bindValue(':year','%'.$year.'%');
-    $seatch_query->bindValue(':type',$type);
+    //$seatch_query->bindValue(':name','%'.$name.'%');
+    //$seatch_query->bindValue(':year','%'.$year.'%');
+    //$seatch_query->bindValue(':type',$type);
     //SQLを実行
     try{
         $seatch_query->execute();
@@ -146,7 +151,7 @@ function delete_profile($id){
     //db接続を確立
     $delete_db = connect2MySQL();
     
-    $delete_sql = "DELEtE * FROM user_t WHERE userID=:id";
+    $delete_sql = "DELEtE FROM user_t WHERE userID=:id";
     
     //クエリとして用意
     $delete_query = $delete_db->prepare($delete_sql);
@@ -158,6 +163,40 @@ function delete_profile($id){
         $delete_query->execute();
     } catch (PDOException $e) {
         $delete_query=null;
+        return $e->getMessage();
+    }
+    return null;
+}
+
+
+
+function update_profile($id, $name,$birthday, $tell, $type, $comment){
+    //db接続を確立
+    $update_db = connect2MySQL();
+    
+    $update_sql = "UPDATE user_t SET name = :name, birthday = :birthday, tell = :tell, type = :type, comment = :comment, newDate = :newDate WHERE userID=:id";
+    
+
+    //現在時をdatetime型で取得
+    $datetime =new DateTime();
+    $newDate = $datetime->format('Y-m-d H:i:s');
+
+    //クエリとして用意
+    $update_query = $update_db->prepare($update_sql);
+
+    $update_query->bindValue(':id', $id);    
+    $update_query->bindValue(':name', $name);
+    $update_query->bindValue(':birthday', $birthday);
+    $update_query->bindValue(':tell', $tell);
+    $update_query->bindValue(':type', $type);
+    $update_query->bindValue(':comment', $comment);
+    $update_query->bindValue(':newDate', $newDate);
+    
+    //SQLを実行
+    try{
+        $update_query->execute();
+    } catch (PDOException $e) {
+        $update_query=null;
         return $e->getMessage();
     }
     return null;

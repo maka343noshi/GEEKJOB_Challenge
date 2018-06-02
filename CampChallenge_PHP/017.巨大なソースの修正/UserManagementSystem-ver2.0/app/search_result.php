@@ -2,6 +2,9 @@
 require_once '../common/defineUtil.php';
 require_once '../common/scriptUtil.php';
 require_once '../common/dbaccesUtil.php';
+$name = null;
+$year = null;
+$type = null;
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -20,10 +23,19 @@ require_once '../common/dbaccesUtil.php';
             </tr>
         <?php
         $result = null;
-        if(empty($_GET['name']) && empty($_GET['year']) && empty($_GET['type'])){
+        if(empty($_POST['name']) && empty($_POST['year']) && empty($_POST['type'])){
             $result = serch_all_profiles();
         }else{
-            $result = serch_profiles($_GET['name'],$_GET['year'],$_GET['type']);
+            if(!empty($_POST['name'])){
+                $name = $_POST['name'];
+            }
+            if(!empty($_POST['year'])){
+                $year = $_POST['year'];
+            }
+            if(!empty($_POST['type'])){
+                $type = $_POST['type'];
+            }
+            $result = serch_profiles($name,$year,$type);
         }
         foreach($result as $value){
         ?>
@@ -37,5 +49,8 @@ require_once '../common/dbaccesUtil.php';
         }
         ?>
         </table>
+
+        <br>
+        <?php echo return_top(); ?>
 </body>
 </html>

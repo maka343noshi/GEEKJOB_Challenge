@@ -1,0 +1,18 @@
+・dbaccesUtil.php
+    ・複数検索時のエラーを修正
+    ・複数検索時、誕生年での検索ができないのを修正
+    ・update_profileメソッドを追加
+    ・delete_profileメソッドの修正
+・result_detail.php
+    ・更新、削除時に同時に'id'を送信するように修正
+・update.php
+    ・生年月日も取得表示できるように修正
+    ・詳細画面へ戻った時にエラーが出ないように修正
+・update_result.php
+    ・未入力チェックを追加
+    ・正しくDBへ更新ができるように修正
+・delete.php
+    ・詳細画面へ戻った時にエラーが出ないように修正
+    ・delete_result.phpに'id'を送れるように修正
+・delete_result.php
+    ・正しく削除できるように修正

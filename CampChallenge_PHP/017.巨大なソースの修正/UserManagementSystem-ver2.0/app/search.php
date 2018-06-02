@@ -8,7 +8,7 @@
       <title>ユーザー情報検索画面</title>
 </head>
   <body>
-    <form action="<?php echo SEARCH_RESULT ?>" method="GET">
+    <form action="<?php echo SEARCH_RESULT ?>" method="POST">
         
         名前:
         <br>

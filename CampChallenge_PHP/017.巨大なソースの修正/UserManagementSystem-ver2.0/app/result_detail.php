@@ -26,9 +26,11 @@ require_once '../common/dbaccesUtil.php';
     登録日時:<?php echo date('Y年n月j日　G時i分s秒', strtotime($result[0]['newDate'])); ?><br>
     
     <form action="<?php echo UPDATE; ?>" method="POST">
+        <input type="hidden" name="id" value=<?php echo $_GET['id'] ?>>
         <input type="submit" name="update" value="変更"style="width:100px">
     </form>
     <form action="<?php echo DELETE; ?>" method="POST">
+        <input type="hidden" name="id" value=<?php echo $_GET['id'] ?>>
         <input type="submit" name="delete" value="削除"style="width:100px">
     </form>
     

@@ -6,7 +6,7 @@ require_once '../common/defineUtil.php';
  * @return トップページへのリンクのaタグ
  */
 function return_top(){
-    return "<a href='".ROOT_URL."'>トップへ戻る</a>";
+    return "<a href=\"./index.php\">トップへ戻る</a>";
 }
 
 /**
